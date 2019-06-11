@@ -7,7 +7,8 @@ module Events
 import qualified Models.ParseResult as PR
 
 data Event = InitGame | Invalid
+  deriving (Show)
 
-nextState :: Event -> PR.ParseResult -> PR.ParseResult
-nextState InitGame parseResult = PR.addGame(parseResult)
-nextState _ parseResult        = parseResult
+nextState :: PR.ParseResult -> Event -> PR.ParseResult
+nextState parseResult InitGame = PR.addGame parseResult
+nextState parseResult _        = parseResult
