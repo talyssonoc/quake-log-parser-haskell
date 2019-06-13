@@ -11,7 +11,7 @@ process = foldl nextState initialValue
 
 nextState :: PS.ParseResult -> Event -> PS.ParseResult
 nextState parseResult InitGame = PS.addGame parseResult
-nextState parseResult (ClientConnect playerId) = PS.addPlayer parseResult playerId
-nextState parseResult (ClientUserinfoChanged playerInfo) = PS.updatePlayerName parseResult playerInfo
-nextState parseResult (ClientDisconnect playerId) = PS.removePlayer parseResult playerId
+nextState parseResult (ClientConnect playerId) = PS.addPlayer playerId parseResult
+nextState parseResult (ClientUserinfoChanged playerInfo) = PS.updatePlayerName playerInfo parseResult
+nextState parseResult (ClientDisconnect playerId) = PS.removePlayer playerId parseResult
 nextState parseResult _        = parseResult
