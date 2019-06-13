@@ -1,14 +1,14 @@
 module Events
     (
-      Event(InitGame, Invalid),
-      nextState
+      Event(..)
     ) where
 
-import qualified Models.ParseResult as PR
+import           Models.Player    (PlayerId, PlayerInfo)
+import           Models.TimeStamp (TimeStamp)
 
-data Event = InitGame | Invalid
+data Event = InitGame
+  | ClientUserinfoChanged PlayerInfo
+  | ClientConnect PlayerId
+  | ClientDisconnect PlayerId
+  | Ignored
   deriving (Show)
-
-nextState :: PR.ParseResult -> Event -> PR.ParseResult
-nextState parseResult InitGame = PR.addGame parseResult
-nextState parseResult _        = parseResult

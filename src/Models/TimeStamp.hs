@@ -1,6 +1,7 @@
 module Models.TimeStamp
     (
-      TimeStamp(TimeStamp)
+      TimeStamp(..)
     ) where
 
-data TimeStamp m s = TimeStamp m s
+newtype TimeStamp = TimeStamp (Int, Int)
+  deriving (Show)
