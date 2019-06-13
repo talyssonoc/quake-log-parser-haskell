@@ -20,20 +20,15 @@ initialValue = ParseResult []
 addGame :: ParseResult -> ParseResult
 addGame (ParseResult games) = ParseResult (games ++ [G.newGame])
 
-addPlayer :: ParseResult -> PlayerId -> ParseResult
-addPlayer parseResult playerId =
-  updateCurrentGame parseResult (G.addPlayer (currentGame parseResult)  playerId)
+addPlayer :: PlayerId -> ParseResult -> ParseResult
+addPlayer playerId = updateCurrentGame (G.addPlayer playerId)
 
-updatePlayerName :: ParseResult -> PlayerInfo -> ParseResult
-updatePlayerName parseResult playerInfo =
-  updateCurrentGame parseResult (G.updatePlayerName (currentGame parseResult) playerInfo)
+updatePlayerName :: PlayerInfo -> ParseResult -> ParseResult
+updatePlayerName playerInfo = updateCurrentGame (G.updatePlayerName playerInfo)
 
-removePlayer :: ParseResult -> PlayerId -> ParseResult
-removePlayer parseResult playerId =
-  updateCurrentGame parseResult (G.removePlayer (currentGame parseResult) playerId)
+removePlayer :: PlayerId -> ParseResult -> ParseResult
+removePlayer playerId = updateCurrentGame (G.removePlayer playerId)
 
-currentGame :: ParseResult -> G.Game
-currentGame (ParseResult games) = last games
-
-updateCurrentGame :: ParseResult -> G.Game -> ParseResult
-updateCurrentGame (ParseResult games) game = ParseResult (init games ++ [game])
+updateCurrentGame :: (G.Game -> G.Game) -> ParseResult -> ParseResult
+updateCurrentGame updateGame (ParseResult games) =
+  ParseResult (init games ++ [updateGame $ last games])

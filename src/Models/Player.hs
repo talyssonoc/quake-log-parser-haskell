@@ -21,8 +21,8 @@ newPlayer :: PlayerId -> Player
 newPlayer = NewPlayer
 
 updatePlayerName :: PlayerInfo -> Player -> Player
-updatePlayerName (i', newName) player
-  | hasId i' player = Player i' newName
+updatePlayerName (i, newName) player
+  | hasId i player = Player i newName
   | otherwise = player
 
 hasId :: PlayerId -> Player -> Bool
