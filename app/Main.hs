@@ -5,5 +5,5 @@ import           Processing.Processor
 
 main :: IO ()
 main = do
-  fileContent <- readFile "/Users/c_tcassiano/development/haskell/quake-log-parser/logs/games.log"
+  fileContent <- readFile "/home/talyssonoc/Development/haskell/quake-log-parser-haskell/logs/games.log"
   print $ process $ parse fileContent
