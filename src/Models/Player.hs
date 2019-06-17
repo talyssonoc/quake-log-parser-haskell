@@ -3,7 +3,6 @@ module Models.Player
       Player(..),
       PlayerId,
       PlayerName,
-      PlayerInfo,
       newPlayer,
       updatePlayerName,
       addItemToPlayer,
@@ -16,8 +15,6 @@ import           Models.TimeStamp (TimeStamp)
 
 type PlayerId = Int
 type PlayerName = String
-
-type PlayerInfo = (PlayerId, PlayerName)
 
 data Player = NewPlayer PlayerId
             | Player PlayerId PlayerName (Map.Map Item TimeStamp)
